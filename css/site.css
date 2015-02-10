@@ -1,0 +1,188 @@
+/**
+* Simple Web GUI for Omxplayer on a Raspberry Pi
+*
+* @link https://github.com/brainfoolong/omxwebgui
+* @author BrainFooLong
+* @license GPL v3
+*/
+
+body{
+    background: #161616;
+    color:white;
+    font-size: 100%;
+    font-family: arial;
+    text-align: center;
+    padding:10px;
+}
+
+a, a:hover, a:active, a:visited{
+    color:#ff0078;
+}
+
+textarea, input{outline: none;}
+
+.ajax-error,
+.ajax-success{
+    display: none;
+    background: #ff6565;
+    color:black;
+    position: fixed;
+    top:10px;
+    left:0px;
+    width:100%;
+    opacity:0.9;
+    border-radius:10px;
+}
+
+.ajax-error > div,
+.ajax-success > div{
+    padding: 10px;
+}
+
+.ajax-success{
+    background: #9bff65;
+}
+
+.page{
+    margin: 0px auto;
+    max-width:1000px;
+}
+
+.button{
+    background: #ff0078;
+    cursor: pointer;
+    color:white;
+    text-transform: uppercase;
+    font-family: arial;
+    border: 0;
+    padding:6px;
+    padding-right: 20px;
+    padding-left: 20px;
+    border-radius:10px;
+    opacity:0.8;
+}
+
+.button:hover{
+    opacity:1;
+    box-shadow: #ff0078 0px 0px 10px;
+}
+
+.header{
+    position: relative;
+    min-height: 250px;
+    text-align: left;
+}
+
+.header .logo{
+    position: absolute;
+}
+
+.header .box{
+    padding-left: 280px;
+    font-size: 75%;
+}
+
+.header .box textarea{
+    border: 0px;
+    background: rgba(255,255,255,0.5);
+    color:#444444;
+    padding:10px;
+    width:95%;
+    margin-bottom: 5px;
+}
+
+.omx-buttons{
+    padding:10px;
+    color:white;
+    text-transform: uppercase;
+    border-radius:10px;
+}
+
+.omx-buttons .button{
+    float:left;
+    font-size: 70%;
+    width:70px;
+    height:70px;
+    margin: 5px;
+    border-radius:60px;
+    padding:20px;
+    position: relative;
+}
+
+.omx-buttons .button span.label{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 30%;
+    width: 50%;
+    margin: -15% 0 0 -25%;
+}
+
+.omx-buttons .button span.shortcut{
+    font-size: 70px;
+    display: block;
+    line-height: 70px;
+    position: absolute;
+    margin-left: 0px;
+    width:70px;
+    text-align: center;
+    color:white;
+    opacity:0.2;
+}
+
+.clear{
+    clear:both;
+}
+
+.files{
+    padding:10px;
+    background: rgba(255,255,255,0.1);
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 80%;
+}
+
+.files:hover{
+    background: rgba(255,255,255,0.2);
+}
+
+.files .results{
+    display: none;
+}
+
+.files .results input{
+    background: url(../images/search.png) #161616 no-repeat 10px center;
+    color:white;
+    padding:10px;
+    font-size: 90%;
+    margin-bottom: 10px;
+    border: 0;
+    width: 95%;
+    margin-top: 5px;
+    padding-left: 40px;
+}
+
+.files .file{
+    padding:6px;
+    background: rgba(255,255,255,0.1);
+    margin-bottom: 1px;
+    font-size: 90%;
+}
+
+.files .file:hover{
+    background: rgba(255,255,255,0.2);
+}
+
+.files .file .match{
+    color:#ff0078;
+    background: white;
+    padding-left: 3px;
+    padding-right: 3px;
+    border-radius:4px;
+}
+
+.footer{
+    padding-top: 30px;
+}
