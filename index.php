@@ -8,13 +8,14 @@
 */
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
+set_time_limit(15);
 if(version_compare(PHP_VERSION, "5.4", "<")) die("You need PHP 5.4 or higher");
 try{
 
     $omxHotkeys = array(
         "z" => array("label" => "Show Info", "key" => "90"),
-        "2" => array("label" => "-<br/>Speed", "key" => "50,98"),
-        "1" => array("label" => "+<br/>Speed", "key" => "49,57"),
+        "1" => array("label" => "-<br/>Speed", "key" => "50,98"),
+        "2" => array("label" => "+<br/>Speed", "key" => "49,57"),
         "j" => array("label" => "Prev Audio Stream", "key" => "74"),
         "k" => array("label" => "Next Audio Stream", "key" => "75"),
         "i" => array("label" => "Previous Chapter", "key" => "73"),
@@ -28,10 +29,10 @@ try{
         "p" => array("label" => "Pause<br/>Resume", "key" => "80"),
         "-" => array("label" => "-<br/>Volume", "key" => "189,109"),
         "+" => array("label" => "+<br/>Volume", "key" => "187,107"),
-        "left" => array("label" => "Slow Backward", "key" => "37"),
-        "right" => array("label" => "Slow Forward", "key" => "39"),
-        "down" => array("label" => "Fast Backward", "key" => "40"),
-        "up" => array("label" => "Fast Forward", "key" => "38")
+        "left" => array("label" => "Slow Backward", "key" => "37", "shortcut" => "b"),
+        "right" => array("label" => "Slow Forward", "key" => "39", "shortcut" => "f"),
+        "down" => array("label" => "Fast Backward", "key" => "40", "shortcut" => "B"),
+        "up" => array("label" => "Fast Forward", "key" => "38", "shortcut" => "F")
     );
 
     function isStreamUrl($path){
@@ -44,16 +45,23 @@ try{
             $files = scandir($dir, SORT_ASC);
             foreach($files as $file){
                 if($file == "." || $file == "..") continue;
-                if(!preg_match("~\.(mp4|mkv|mpg|avi|mpeg)~i", $file)) continue;
                 $path = $dir."/".$file;
                 if(is_dir($path)){
                     $arr = array_merge($arr, getVideoFiles($path));
                 }else{
+                    if(!preg_match("~\.(mp4|mkv|mpg|avi|mpeg)~i", $file)) continue;
                     $arr[] = $path;
                 }
             }
         }
         return $arr;
+    }
+
+    function omx($omxcmd, $method, $fifo){
+        $script = __DIR__."/omx-{$method}.sh";
+        $cmd = "timeout 5 sh ".escapeshellarg($script)." ".escapeshellarg($omxcmd)." ".escapeshellarg($fifo)." > /dev/null 2>&1";
+        $output = $return = "";
+        exec($cmd, $output, $return);
     }
 
     $folderFile = __DIR__."/folders.txt";
@@ -78,7 +86,22 @@ try{
                 echo "<br/>Reload the page to see the changes";
             break;
             case "shortcut":
-
+                $fifo = __DIR__."/tmp/fifo";
+                switch($_POST["shortcut"]){
+                    case "start":
+                        omx("-o hdmi -b ".$_POST["path"], "start", $fifo);
+                    break;
+                    case "p":
+                        if(!file_exists($fifo)){
+                            omx("-o hdmi -b ".$_POST["path"], "start", $fifo);
+                        }else{
+                            omx("p", "pipe", $fifo);
+                        }
+                    break;
+                    default:
+                        $key = $omxHotkeys[$_POST["shortcut"]];
+                        omx(isset($key["shortcut"]) ? $key["shortcut"] : $_POST["shortcut"], "pipe", $fifo);
+                }
             break;
         }
         die();
@@ -116,7 +139,7 @@ try{
             </div>
         </div>
         <div class="files">
-            <div class="current">Currently Playing: None</div>
+            <div class="current">Currently Playing: <span>None</span></div>
             <div class="results">
                 <input type="text" class="search" value="Search for filename, wildcards * allowed"/>
                 <?

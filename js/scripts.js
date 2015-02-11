@@ -1,6 +1,6 @@
 function doAction(data){
     $.post("index.php", data, function(response){
-        $(".ajax-success").show().stop().css("opacity", 1).fadeOut(17000).children().html(response);
+        if(response.length) $(".ajax-success").show().stop().css("opacity", 1).fadeOut(17000).children().html(response);
     });
 };
 $(document).ajaxError(function(event, jqxhr, settings, thrownError){
@@ -13,7 +13,7 @@ $(document).ajaxError(function(event, jqxhr, settings, thrownError){
     for(var i in omxHotkeys){
         var s = omxHotkeys[i].key.split(",");
         if($.inArray(k, s) !== -1){
-            doAction({"action" : "shortcut", "shortcut" : i});
+            $(".omx-buttons .button[data-shortcut='"+i+"']").trigger("click");
             break;
         }
     }
@@ -30,6 +30,11 @@ $(document).ready(function(){
                 doAction(data);
                 break;
         }
+    }).on("click", ".files .file", function(ev){
+        $(".files .current").attr("data-path", $(this).attr("data-path")).children("span").html($(this).attr("data-path"));
+        doAction({"action" : "shortcut", "shortcut" : "start", "path" : $(".files .current").attr("data-path")});
+    }).on("click", ".omx-buttons .button[data-shortcut]", function(ev){
+        doAction({"action" : "shortcut", "shortcut" : $(this).attr("data-shortcut"), "path" : $(".files .current").attr("data-path")});
     });
     $(".search").on("focus", function(){
         if(!$(this).attr("data-value")) $(this).attr("data-value", this.value);

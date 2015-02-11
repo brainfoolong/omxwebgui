@@ -32,6 +32,7 @@ textarea, input{outline: none;}
     width:100%;
     opacity:0.9;
     border-radius:10px;
+    z-index:1;
 }
 
 .ajax-error > div,
