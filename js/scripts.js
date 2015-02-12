@@ -25,7 +25,7 @@ function t(key){
 
 // ajax error and success handlers
 $(document).ajaxError(function(event, jqxhr, settings, thrownError){
-    $(".ajax-error").show().children().html(jqxhr.responseText.replace(/\n/ig, "<br/>"));
+    if(jqxhr.status == 500) $(".ajax-error").show().children().html(jqxhr.responseText.replace(/\n/ig, "<br/>"));
 }).on("keyup", function(ev){
     if(!$(ev.target).is("body")) return;
     var k = ev.keyCode.toString();
