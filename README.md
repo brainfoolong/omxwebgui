@@ -19,3 +19,6 @@ Open the page with http://IPTOYOURPI:4321
 Add the following line to crontab with `sudo crontab -e` to start the simple php webserver on reboot
 
 `@reboot php -S 0.0.0.0:4321 -t YOURPATHTOOMXWEBGUI > /dev/null 2>&1 &`
+
+## Screenshot
+![alt text](http://i.imgur.com/ZIrqPFX.jpg "Screenshot")
