@@ -112,11 +112,15 @@ textarea, input{outline: none;}
 
 .omx-buttons .button span.label{
     position: absolute;
+    display: block;
     top: 50%;
-    left: 50%;
     height: 30%;
-    width: 50%;
-    margin: -15% 0 0 -25%;
+    left:0px;
+    padding-left: 5px;
+    padding-right: 5px;
+    width:100px;
+    margin: -15% 0 0 0;
+    text-shadow:rgba(0,0,0,0.7) 0px 0px 10px;
 }
 
 .omx-buttons .button span.shortcut{
@@ -129,6 +133,7 @@ textarea, input{outline: none;}
     text-align: center;
     color:white;
     opacity:0.2;
+    text-shadow:rgba(0,0,0,0.7) 0px 0px 10px;
 }
 
 .clear{
@@ -170,6 +175,14 @@ textarea, input{outline: none;}
     background: rgba(255,255,255,0.1);
     margin-bottom: 1px;
     font-size: 90%;
+}
+
+.files .file.active{
+    font-weight: bold;
+    color:#ff0078;
+    background: white;
+    padding-left: 3px;
+    padding-right: 3px;
 }
 
 .files .file:hover{
