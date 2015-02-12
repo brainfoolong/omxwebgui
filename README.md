@@ -2,6 +2,14 @@
 
 Currently in alpha but should work.
 
+## Features
+* Play/Stop videos through the browser - Also mobile browser compatible
+* All hotkeys from omxplayer mapped to the webpage
+* Multilanguage
+* Permanent playlist - Just add folders and streams
+* Search for filenames with wildcards
+* Autoplay next video
+
 ## Requirements
 `sudo apt-get install php5-cli`
 * or when you already have a webserver installed with PHP 5.4+ than you need nothing extra :)
@@ -13,7 +21,7 @@ To create a simple php webserver listening on port 4321, you can change the port
 
 Open the page with http://IPTOYOURPI:4321
 
-* or when you already have a webserver just open the page int he browser.
+* or when you already have a webserver just open the page in the browser.
 
 ## Autostart
 Add the following line to crontab with `sudo crontab -e` to start the simple php webserver on reboot
