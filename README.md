@@ -9,6 +9,7 @@ Currently in alpha but should work.
 * Permanent playlist - Just add folders and streams
 * Search for filenames with wildcards
 * Autoplay next video
+* Mark of already viewed videos
 
 ## Requirements
 `sudo apt-get install php5-cli`
