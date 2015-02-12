@@ -12,6 +12,11 @@ ini_set("display_errors", 1);
 set_time_limit(15);
 if(version_compare(PHP_VERSION, "5.4", "<")) die("You need PHP 5.4 or higher");
 header("X-UA-Compatible: IE=edge");
+header("Expires: 0");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header("Cache-Control: no-store, no-cache, must-revalidate");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 
 require(__DIR__."/lib/functions.php");
 require(__DIR__."/lib/Translations.class.php");
@@ -37,6 +42,12 @@ try{
                     if(file_exists(OMX::$fifoStatusFile)){
                         $json = json_decode(file_get_contents(OMX::$fifoStatusFile), true);
                         $data["path"] = $json["path"];
+                        # view cache
+                        $hash = getPathHash($data["path"]);
+                        if(!isset($options["viewed"][$hash])) {
+                            $options["viewed"][$hash] = true;
+                            file_put_contents($optionsFile, json_encode($options));
+                        }
                     }
                 }
                 break;
@@ -55,7 +66,9 @@ try{
                     $files = array_merge($files, isStreamUrl($folder) ? array($folder) : getVideoFiles($folder));
                 }
                 foreach($files as $file){
-                    echo '<div class="file" data-path="'.$file.'">'.$file.'</div>';
+                    $classes = array("file");
+                    if(isset($options["viewed"][getPathHash($file)])) $classes[] = "viewed";
+                    echo '<div class="'.implode(" ", $classes).'" data-path="'.$file.'"><span class="eye"></span> <span class="path">'.$file.'</span></div>';
                 }
                 exit;
                 break;
@@ -108,7 +121,7 @@ try{
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-            <meta name="viewport" content="width=500, initial-scale=1.1">
+            <meta name="viewport" content="width=670, initial-scale=0.8">
             <link rel="stylesheet" type="text/css" href="css/site.css">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <script type="text/javascript" src="js/jquery.js"></script>
@@ -147,9 +160,9 @@ try{
                     </div>
                 </div>
                 <div class="files">
-                    <div class="status-line"><b><?=t("status")?>:</b> <span id="status"></span></div>
+                    <div class="status-line"><b><?=t("status")?>:</b> <span id="status"><?=t("loading")?>...</span></div>
                     <div class="results">
-                        <input type="text" class="search" value="<?=t("search.input")?>"/>
+                        <input type="text" class="search" value="<?=t("search.input")?>" autocomplete="off"/>
                         <div id="filelist"><?=t("loading")?>...</div>
                     </div>
                 </div>

@@ -171,18 +171,31 @@ textarea, input{outline: none;}
 }
 
 .files .file{
-    padding:6px;
+    padding:9px;
     background: rgba(255,255,255,0.1);
     margin-bottom: 1px;
     font-size: 90%;
 }
 
+.files .file .eye{
+    display: inline-block;
+    width:20px;
+    height:9px;
+    background: url(../images/eye.png);
+    opacity:0.1;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.files .file.viewed .eye{
+    opacity:1;
+}
+
 .files .file.active{
     font-weight: bold;
-    color:#ff0078;
-    background: white;
-    padding-left: 3px;
-    padding-right: 3px;
+    color:#ff0078 !important;
+    background: white !important;
+    cursor: default;
 }
 
 .files .file:hover{
@@ -195,6 +208,10 @@ textarea, input{outline: none;}
     padding-left: 3px;
     padding-right: 3px;
     border-radius:4px;
+}
+
+.status-line{
+    padding:10px;
 }
 
 .footer{

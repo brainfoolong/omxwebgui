@@ -47,20 +47,22 @@ $(document).ready(function(){
     // fetch current player status
     var fetchTimeout = null;
     var lastPath = null;
+    var autoplayNext = options["autoplay-next"] === "1";
     var fetchStatus = function(){
         clearTimeout(fetchTimeout);
         $.getJSON(window.location.href.replace(/\?.*/ig, "")+"?json=1&action=get-status", function(data){
             $(".files .file").removeClass("active");
+            lastStatus = data.status;
             switch(data.status){
                 case "playing":
                     lastPath = data.path;
                     $("#status").html(t("Playing")+": <span class='current-file'>"+data.path+'</span>');
-                    $(".files .file").filter("[data-path='"+data.path+"']").addClass("active");
+                    $(".files .file").filter("[data-path='"+data.path+"']").addClass("active viewed");
                 break;
                 case "stopped":
                     $("#status").html(t("video.notselected"));
                     var currentFile = $(".file").filter("[data-path='"+lastPath+"']");
-                    if(currentFile.length && currentFile.next().length && lastPath && options["autoplay-next"] === "1"){
+                    if(currentFile.length && currentFile.next().length && lastPath && autoplayNext){
                         lastPath = null;
                         currentFile.next().trigger("click");
                     }
@@ -82,18 +84,24 @@ $(document).ready(function(){
                 doAction(data);
                 break;
         }
-    }).on("click", ".files .file", function(ev){
+    }).on("click", ".files .file:not(.active)", function(ev){
         $("#status").html(t("loading")+"...");
+        $(".files .status-line").trigger("click");
         doAction({"action" : "shortcut", "shortcut" : "start", "path" : $(this).attr("data-path")});
     }).on("click", ".omx-buttons .button[data-shortcut]", function(ev){
+        if($(this).attr("data-shortcut") == "q") {
+            if(lastStatus == "playing") autoplayNext = false;
+            if(lastStatus == "stopped") autoplayNext = options["autoplay-next"] === "1";
+        }
         doAction({"action" : "shortcut", "shortcut" : $(this).attr("data-shortcut"), "path" : $(".current-file").text()});
+        ev.stopPropagation();
     });
 
     // search handler
     $(".search").on("focus", function(){
         if(!$(this).attr("data-value")) $(this).attr("data-value", this.value);
         this.value = "";
-    }).on("keyup blur", function(ev){
+    }).on("keyup blur init", function(ev){
         if(ev.keyCode == 27){
             this.value = "";
             $(this).blur();
@@ -101,8 +109,8 @@ $(document).ready(function(){
         }
         var v = this.value.trim();
         if(v.length <= 1){
-            $(".results .file").show().each(function(){
-                $(this).html($(this).attr("data-path"));
+            $("#filelist .file").show().each(function(){
+                $(this).find(".path").html($(this).attr("data-path"));
             });
             if(v.length == 0 && ev.type == "blur") $(this).val($(this).attr("data-value"));
             return;
@@ -112,23 +120,27 @@ $(document).ready(function(){
         for(var i in sRegex) {
             sRegex[i] = {"regex" : new RegExp(sRegex[i].replace(/[^0-9a-z\/\*]/ig, "\\$&").replace(/\*/ig, ".*?"), "ig"), "val" : s[i]};
         }
-        $(".results .file").hide().each(function(){
+        $("#filelist .file").hide().each(function(){
             var f = $(this);
             var p = f.attr("data-path");
             var html = p;
             var matches = [];
+            var fail = false;
             sRegex.forEach(function(val){
                 var m = p.match(val.regex);
-                if(p.match(val.regex)){
-                    f.show();
+                if(!p.match(val.regex)){
+                    fail = true;
+                    return true;
+                }else{
                     matches.push(m[0]);
                     html = html.replace(val.regex, "_"+(matches.length - 1)+"_");
                 }
             });
+            if(!fail) f.show();
             for(var i in matches){
                 html = html.replace(new RegExp("_"+i+"_", "ig"), '<span class="match">'+matches[i]+'</span>');
             }
-            f.html(html);
+            f.find(".path").html(html);
         });
     });
     // toggle filelist

@@ -11,10 +11,10 @@ then
     rm $3
 fi
 mkfifo $3
-omxplayer -o hdmi -b $1 < $3 &
+omxplayer -o hdmi -b "$1" < $3 &
 echo -n "." > $3 &
 
 # fix for double play speed at start
-if [ $2 -eq 1 ]
+if [ "$2" = "1" ]; then
     echo -n "1" > $3 &
 fi

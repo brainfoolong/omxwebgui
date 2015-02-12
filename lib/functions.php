@@ -55,3 +55,13 @@ function getVideoFiles($dir){
 function isStreamUrl($path){
     return $path && preg_match("~[a-z]+\:\/\/~i", $path) ? true : false;
 }
+
+/**
+* Get path hash
+*
+* @param mixed $path
+* @return string
+*/
+function getPathHash($path){
+    return substr(md5($path), 0, 12);
+}
