@@ -29,5 +29,8 @@ Add the following line to crontab with `sudo crontab -e` to start the simple php
 
 `@reboot php -S 0.0.0.0:4321 -t YOURPATHTOOMXWEBGUI > /dev/null 2>&1 &`
 
+## Troubleshooting
+Make sure that the root folder and the folder "tmp", where you have installed the omxwebgui, have the rights CHMOD 777. For example you install it under `/home/pi/omxwebgui` that the folder `/home/pi/omxwebgui` and `/home/pi/omxwebgui/tmp` need chmod 777. If that does not work for try to set all files and folders to 777 but that shouldn't be necessary. 
+
 ## Screenshot
 ![alt text](http://i.imgur.com/ZIrqPFX.jpg "Screenshot")
