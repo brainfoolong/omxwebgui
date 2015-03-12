@@ -1,7 +1,7 @@
 # Simple Web GUI for Omxplayer on a Raspberry Pi made in PHP
 
 Currently in alpha but should work.
-If you like it please give it a upvote here: http://raspberrypi.stackexchange.com/questions/22200/is-there-any-gui-mode-for-omxplayer
+If you like it please give it a upvote here: http://raspberrypi.stackexchange.com/a/27805/27119
 
 ## Features
 * Play/Stop videos through the browser - Also mobile browser compatible
