@@ -14,7 +14,6 @@ If you like it please give it a upvote here: http://raspberrypi.stackexchange.co
 
 ## Requirements
 `sudo apt-get install php5-cli`
-* or when you already have a webserver installed with PHP 5.4+ than you need nothing extra :)
 
 ## Run
 To create a simple php webserver listening on port 4321, you can change the port to whatever you want.
@@ -22,8 +21,6 @@ To create a simple php webserver listening on port 4321, you can change the port
 `php -S 0.0.0.0:4321 -t YOURPATHTOOMXWEBGUIFOLDER > /dev/null 2>&1 &`
 
 Open the page with http://IPTOYOURPI:4321
-
-* or when you already have a webserver just open the page in the browser.
 
 ## Autostart
 Add the following line to crontab with `sudo crontab -e` to start the simple php webserver on reboot
