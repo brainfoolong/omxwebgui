@@ -38,7 +38,7 @@ function getVideoFiles($dir){
             if(is_dir($path)){
                 $arr = array_merge($arr, getVideoFiles($path));
             }else{
-                if(!preg_match("~\.(mp4|mkv|mpg|avi|mpeg)~i", $file)) continue;
+                if(!preg_match("~\.(mp3|mp4|mkv|mpg|avi|mpeg)~i", $file)) continue;
                 $arr[] = $path;
             }
         }
