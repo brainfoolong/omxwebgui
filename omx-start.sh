@@ -12,7 +12,8 @@ then
 fi
 mkfifo $3
 omxplayer -o hdmi -b "$1" < $3 &
-echo -n "." > $3 &
+# Playing Audio Files (MP3) doesn't seem to work with this
+#echo -n "." > $3 &
 
 # fix for double play speed at start
 if [ "$2" = "1" ]; then
