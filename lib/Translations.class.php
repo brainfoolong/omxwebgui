@@ -17,7 +17,7 @@ class Translations{
     *
     * @var array
     */
-    static $languages = array("en" => "English", "de" => "Deutsch");
+    static $languages = array("en" => "English", "de" => "Deutsch", "es" => "Español");
 
     /**
     * Translations
@@ -106,6 +106,47 @@ class Translations{
             "playing" => "Spielt",
             "video.notselected" => "Kein Video selektiert",
             "ui.language" => "Interface Sprache"
+        ),
+	"es" => array(
+            "shortcut-q" => "Stop\nReproductor",
+            "shortcut-p" => "Pausar\nReanudar",
+            "shortcut--" => "Bajar Volumen",
+            "shortcut-+" => "Subir Volumen",
+            "shortcut-left" => "Atras Lento",
+            "shortcut-right" => "Adelante Lento",
+            "shortcut-down" => "Atras Rapido",
+            "shortcut-up" => "Adelante Rapido",
+            "shortcut-z" => "Mostrar Info",
+            "shortcut-1" => "Bajar\nVelocidad",
+            "shortcut-2" => "Subir\nVelocidad",
+            "shortcut-j" => "Prev Pista Audio",
+            "shortcut-k" => "Sig Pista Audio",
+            "shortcut-i" => "Capitulo Anterior",
+            "shortcut-o" => "Capitulo Siguiente",
+            "shortcut-n" => "Prev Subtitulo",
+            "shortcut-m" => "Sig Subtitulo",
+            "shortcut-s" => "Conmutar Subtitulos",
+            "shortcut-d" => "Disminuir vel Subtitulo",
+            "shortcut-f" => "Aumentar vel Subtitulo",
+            "yes" => "Sí",
+            "no" => "No",
+            "enabled" => "Activado",
+            "disabled" => "Desactivado",
+            "folders.desc" => "Agregar carpetas donde tienes ficheros de video - Una carpeta por linea - Busqueda recursiva\nPuedes agregar streams tipo rtmp://, rtstp://, http://, etc...",
+            "option.speedfix.name" => "Arreglo Doble velocidad",
+            "option.speedfix.desc" => "Activar esto cuando tu reproductor empieze con velocidad 2.000",
+            "option.autoplay-next.name" => "Autoreproducir siguiente video",
+            "option.autoplay-next.desc" => "Solo funciona cuando el navegador permanece abierto",
+            "save" => "Guardar",
+            "saved" => "Guardado",
+            "status" => "Estado",
+            "search.input" => "Buscar ficheros, puedes usar (*)comodines",
+            "loading" => "Cargando",
+            "error.folders" => ", pero no todas las carpetas han sido leidas - Carpetas inexistentes o ilegibles han sido borradas",
+            "reload.page" => "Recarga la página para ver los cambios",
+            "playing" => "Reproduciendo",
+            "video.notselected" => "Video no seleccionado",
+            "ui.language" => "Interfaz Idioma"
         )
     );
 
