@@ -175,7 +175,7 @@ try{
                             case "up": $keyValue = "&#x2191"; break;
                             case "down": $keyValue = "&#x2193"; break;
                         }
-                        echo '<div class="button" data-action="shortcut" data-shortcut="'.$key.'"><span class="shortcut">'.$keyValue.'</span><span class="label">'.nl2br(t("shortcut-$key")).'</span></div>';
+                        echo '<div class="button" data-action="shortcut" data-shortcut="'.$key.'"><span class="shortcut">'.$keyValue.'</span><span class="label">'.t("shortcut-$key").'</span></div>';
                     }?>
                     <div class="clear"></div>
                 </div>

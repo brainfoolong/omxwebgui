@@ -26,8 +26,8 @@ class Translations{
     */
     static $translations = array(
         "en" => array(
-            "shortcut-q" => "Stop\nPlayer",
-            "shortcut-p" => "Pause\nResume",
+            "shortcut-q" => "Stop Player",
+            "shortcut-p" => "Pause Resume",
             "shortcut--" => "Volume Down",
             "shortcut-+" => "Volume Up",
             "shortcut-left" => "Slow Backward",
@@ -35,8 +35,8 @@ class Translations{
             "shortcut-down" => "Fast Backward",
             "shortcut-up" => "Fast Forward",
             "shortcut-z" => "Show Info",
-            "shortcut-1" => "Speed\nDown",
-            "shortcut-2" => "Speed\nUp",
+            "shortcut-1" => "Speed Down",
+            "shortcut-2" => "Speed Up",
             "shortcut-j" => "Prev Audio Stream",
             "shortcut-k" => "Next Audio Stream",
             "shortcut-i" => "Previous Chapter",

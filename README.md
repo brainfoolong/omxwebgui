@@ -1,3 +1,6 @@
+# New Version
+The next version of the omxwebgui is ready. https://github.com/brainfoolong/omxwebgui-v2. This version is no longer active developed.
+
 # Simple Web GUI for Omxplayer on a Raspberry Pi made in PHP
 
 Currently in alpha but should work.
